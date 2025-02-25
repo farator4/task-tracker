@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import TaskItem from "./TaskItem";
 
 const TaskList = ({ tasks, setTasks }) => {
@@ -10,4 +11,16 @@ const TaskList = ({ tasks, setTasks }) => {
     </ul>
   );
 };
+
+TaskList.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ).isRequired,
+  setTasks: PropTypes.func.isRequired,
+};
+
 export default TaskList;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 const TaskForm = ({ setTasks }) => {
@@ -30,4 +31,9 @@ const TaskForm = ({ setTasks }) => {
     </form>
   );
 };
+
+TaskForm.propTypes = {
+  setTasks: PropTypes.func.isRequired,
+};
+
 export default TaskForm;
