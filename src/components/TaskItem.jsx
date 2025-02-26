@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
+import { Checkbox, Button, List } from 'antd';
+import { DeleteOutlined } from "@ant-design/icons";
 
 const TaskItem = ({ task, setTasks }) => {
 
   const toggleComplete = () => {
-    setTasks((prevTasks) => 
+    setTasks((prevTasks) =>
       prevTasks.map((t) =>
-        t.id === task.id ? {...t, completed: !t.completed } : t
+        t.id === task.id ? { ...t, completed: !t.completed } : t
       )
     );
   };
@@ -17,19 +19,32 @@ const TaskItem = ({ task, setTasks }) => {
   };
 
   return (
-    <li>
-      <span
-        onClick={toggleComplete}
-        style={{
-          textDecoration: task.completed ? "line-through" : "none"
-        }}
+    <List.Item
+      actions={[
+        <Button
+          key="delete"
+          type="text"
+          danger
+          icon={<DeleteOutlined />}
+          onClick={deleteTask}
+        />,
+      ]}
+    >
+      <Checkbox
+        checked={task.completed}
+        onChange={toggleComplete}
       >
-        {task.text}
-      </span>
-      <button onClick={deleteTask}>X</button>
-    </li>
+        <span
+          style={{
+            textDecoration: task.completed ? "line-through" : "none"
+          }}
+        >
+          {task.text}
+        </span>
+      </Checkbox>
+    </List.Item>
   );
-}
+};
 
 TaskItem.propTypes = {
   task: PropTypes.shape({

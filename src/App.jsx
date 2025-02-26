@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-
-import './styles.css';
+import './App.css';
 
 function App() {
 
@@ -17,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

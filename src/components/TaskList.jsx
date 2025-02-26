@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
 import TaskItem from "./TaskItem";
+import { List } from 'antd';
 
 const TaskList = ({ tasks, setTasks }) => {
   
   return (
-    <ul>
-      {tasks.map((task) => (
+    <List
+      bordered
+      dataSource={tasks}
+      renderItem={(task) => (
         <TaskItem key={task.id} task={task} setTasks={setTasks} />
-      ))}
-    </ul>
+      )}
+    />
   );
 };
 

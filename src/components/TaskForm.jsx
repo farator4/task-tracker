@@ -1,34 +1,36 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { Input, Button, Form } from 'antd';
 
 const TaskForm = ({ setTasks }) => {
-  const [text, setText] = useState("");
+  const [form] = Form.useForm();
   
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!text.trim()) return;
+  const handleSubmit = (values) => {
+    if (!values.taskText.trim()) return;
     
     setTasks((prevTasks) => [
       ...prevTasks,
       {
         id: Date.now(),
-        text,
+        text: values.taskText,
         completed: false
       }
     ]);
-    setText("");
+    form.setFieldsValue({ taskText: "" });
+    form.getFieldInstance("taskText").focus();
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Add your task..."
-      />
-      <button type="submit">Add</button>
-    </form>
+    <Form form={form} layout="inline" onFinish={handleSubmit}>
+      <Form.Item 
+        name="taskText"
+        style={{ flexGrow: 1 }}
+      >
+        <Input placeholder="Add your task..." />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">Add</Button>
+      </Form.Item>
+    </Form>
   );
 };
 
