@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
-import { Checkbox, Button, List } from 'antd';
+import { Checkbox, Button, List, theme } from 'antd';
 import { DeleteOutlined } from "@ant-design/icons";
+import classNames from "classnames";
+
+import styles from "./TaskItem.module.css";
 
 const TaskItem = ({ task, setTasks }) => {
+  const { token } = theme.useToken();
 
   const toggleComplete = () => {
     setTasks((prevTasks) =>
@@ -20,19 +24,34 @@ const TaskItem = ({ task, setTasks }) => {
 
   return (
     <List.Item
+      className={classNames(styles.taskItem, {
+        "completedTask": task.completed,
+        "importantTask": task.text.includes("!!!"), //TODO get what's going on here
+      })}
+      // style={{
+      //   padding: "10px",
+      //   borderBottom: `1px solid ${token.colorBorderSecondary}`,
+      // }}
       actions={[
         <Button
           key="delete"
           type="text"
           danger
+          size="small"
           icon={<DeleteOutlined />}
           onClick={deleteTask}
+          className={styles.taskDeleteButton} //? what's that, brada
         />,
       ]}
     >
       <Checkbox
+        className={styles.taskCheckbox}
         checked={task.completed}
         onChange={toggleComplete}
+        // style={{
+        //   fontSize: "16px",
+        //   color: token.colorText,
+        // }}
       >
         <span
           style={{
@@ -48,7 +67,7 @@ const TaskItem = ({ task, setTasks }) => {
 
 TaskItem.propTypes = {
   task: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
   }).isRequired,

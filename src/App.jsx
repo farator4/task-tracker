@@ -1,18 +1,23 @@
 import { useState } from 'react';
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
-import './App.css';
+import { ConfigProvider } from "antd";
+import TaskForm from "./components/TaskForm/TaskForm";
+import TaskList from "./components/TaskList/TaskList";
+import theme from "./theme.js";
+import styles from './App.module.css';
 
 function App() {
 
   const [tasks, setTasks] = useState([]);
 
   return (
-    <div className="app">
-      <h1>Task Tracker</h1>
-      <TaskForm setTasks={setTasks} />
-      <TaskList tasks={tasks} setTasks={setTasks} />
-    </div>
+    <ConfigProvider theme={theme}>
+      <div className={styles.app}>
+        <h1>Task Tracker</h1>
+        <TaskForm setTasks={setTasks} />
+        <TaskList tasks={tasks} setTasks={setTasks} />
+      </div>
+    </ConfigProvider>
+  
   )
 }
 

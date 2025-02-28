@@ -1,0 +1,8 @@
+.importantTask {
+  background-color: var(--color-primary-hover);
+}
+
+.completedTask {
+  text-decoration: line-through;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,15 @@
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12 px;
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.taskCheckbox {
+  font-size: 16px;
+}
+
+.taskDeleteButton {
+  color: red;
+}
